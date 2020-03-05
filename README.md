@@ -33,12 +33,45 @@ pip -V
 
 Then, begin creating the project/app normally.
 
-# Cheatsheet: 
-
+## Cheatsheet: 
+# Web-App General setup
 ```
 django-admin startproject myproject
 python manage.py startapp myapp
 ```
 
+In the settings.py of myproject:
+Edit, (For this example, im using the name myapp)
+```
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'myapp.apps.myappConfig', 
+]
+```
 
+**Note:** follow naming conventions. Config is always a capital C.
+**REQUIRED:** Change allowed hosts using
+```
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+```
+
+and create a new variable after STATIC_URL by
+
+```
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+```
+
+**OPTIONAL** Change timezones in 
+```
+TIME_ZONE = 'PST'
+USE_TZ = True
+```
+
+# Admin Page Setup
+# Editing Views
 
