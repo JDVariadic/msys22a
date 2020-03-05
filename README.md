@@ -40,7 +40,7 @@ django-admin startproject myproject
 python manage.py startapp myapp
 ```
 
-In the settings.py of myproject:
+In the **settings.py** of myproject:
 Edit, (For this example, im using the name myapp)
 ```
 INSTALLED_APPS = [
@@ -54,8 +54,10 @@ INSTALLED_APPS = [
 ]
 ```
 
-**Note:** follow naming conventions. Config is always a capital C.
+*Note:* follow naming conventions. Config is always a capital C.
+
 **REQUIRED:** Change allowed hosts using
+
 ```
 ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 ```
