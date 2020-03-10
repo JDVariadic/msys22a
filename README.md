@@ -100,8 +100,13 @@ class Supplier(models.Model):
     def __str__(self):
       return str(self.pk) + ': ' + self.name + ', ' + self.city + ', ' + self.country + ', ' + str(self.created_at)
 ```
-```models.Model``` Tells python that the class is of type model
-```CharField``` and ```DateTimeField``` signify the data types of the fields. For more field types, you can go to: https://docs.djangoproject.com/en/3.0/ref/models/fields/
+```models.Model``` Tells python that the class is of type model.
+
+```CharField``` and ```DateTimeField``` signify the data types of the fields. For more field types, you can go to: 
+
+```self.pk``` or primary key is a unique ID assigned to data in the database. This is useful when there are duplicates on fields such as names, cities, etc.
+
+https://docs.djangoproject.com/en/3.0/ref/models/fields/
 
 # Adding Models to Admin Page
 When to **migrate**:
@@ -116,9 +121,55 @@ python manage.py migrate
 
 When editing code that refers to **adding** into the database
 Examples: Editing Field types, Adding new variables
+From just showing the name and the city,
+```
+class Supplier(models.Model):
+    name = models.CharField(max_length = 300)
+    city = models.CharField(max_length = 300)
+    objects = models.Manager()
+
+    def __str__(self):
+      return str(self.pk) + ': ' + self.name + ', ' + self.city
+```
+I have to migrate the code since I added new fields to my model.
+```
+class Supplier(models.Model):
+    name = models.CharField(max_length = 300)
+    city = models.CharField(max_length = 300)
+    country = models.CharField(max_length = 300)
+    created_at = models.DateTimeField(blank = True, null = True)
+    objects = models.Manager()
+
+    def __str__(self):
+      return str(self.pk) + ': ' + self.name + ', ' + self.city + ', ' + self.country + ', ' + str(self.created_at)
+```
 
 No need to migrate when editing code that refers to **viewing** the database.
 Examples: editing the str function of a class.
+From just showing the name of the instances
+```
+class Supplier(models.Model):
+    name = models.CharField(max_length = 300)
+    city = models.CharField(max_length = 300)
+    country = models.CharField(max_length = 300)
+    created_at = models.DateTimeField(blank = True, null = True)
+    objects = models.Manager()
+
+    def __str__(self):
+      return str(self.pk) + ': ' + self.name
+```
+I can edit the str function to show everything else without doing migrations.
+```
+class Supplier(models.Model):
+    name = models.CharField(max_length = 300)
+    city = models.CharField(max_length = 300)
+    country = models.CharField(max_length = 300)
+    created_at = models.DateTimeField(blank = True, null = True)
+    objects = models.Manager()
+
+    def __str__(self):
+      return str(self.pk) + ': ' + self.name + ', ' + self.city + ', ' + self.country + ', ' + str(self.created_at)
+```
 
 (Note: Not an end all be all rule)
 
