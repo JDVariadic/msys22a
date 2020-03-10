@@ -73,7 +73,54 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 TIME_ZONE = 'PST'
 USE_TZ = True
 ```
+# Introduction to the MVC Model
+
+# Running the Server
+
+```
+python manage.py runserver
+```
 
 # Admin Page Setup
+```
+python manage.py createsuperuser
+```
+
+# Creating Models
+Under the app directory, go to models.py
+Sample Code:
+```
+class Supplier(models.Model):
+    name = models.CharField(max_length = 300)
+    city = models.CharField(max_length = 300)
+    country = models.CharField(max_length = 300)
+    created_at = models.DateTimeField(blank = True, null = True)
+    objects = models.Manager()
+
+    def __str__(self):
+      return str(self.pk) + ': ' + self.name + ', ' + self.city + ', ' + self.country + ', ' + str(self.created_at)
+```
+```models.Model``` Tells python that the class is of type model
+```CharField``` and ```DateTimeField``` signify the data types of the fields. For more field types, you can go to: https://docs.djangoproject.com/en/3.0/ref/models/fields/
+
+# Adding Models to Admin Page
+When to **migrate**:
+Typical rule of thumb is to
+```
+python manage.py makemigrations
+```
+and
+```
+python manage.py migrate
+```
+
+When editing code that refers to **adding** into the database
+Examples: Editing Field types, Adding new variables
+
+No need to migrate when editing code that refers to **viewing** the database.
+Examples: editing the str function of a class.
+
+(Note: Not an end all be all rule)
+
 # Editing Views
 
